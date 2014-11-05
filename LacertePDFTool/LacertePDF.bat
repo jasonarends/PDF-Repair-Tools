@@ -28,10 +28,10 @@ del %systemroot%\system32\spool\printers\*.spl 2>NUL
 
 
 echo Removing nul Port... 
-call regedit.exe /s registry\removenul.reg
+call regedit.exe /s removenul.reg
 PING -n 1 127.0.0.1 >NUL
 echo Adding NUL Port...
-call regedit.exe /s registry\addports.reg
+call regedit.exe /s addports.reg
 PING -n 1 127.0.0.1 >NUL
 echo Starting Print Spooler Service...
 net start "Spooler"
@@ -64,20 +64,18 @@ PING -n 1 127.0.0.1 >NUL
 
 if not exist "c:\users" (
 	echo Configuring DMS PDF Printer for XP...
-	call regedit.exe /s registry\dmsprinterxp.reg
+	call regedit.exe /s dmsprinterxp.reg
 ) else (
 	if exist "c:\program files (x86)" (
 		echo Configuring DMS PDF Printer for Win7-64...
-		call regedit.exe /s registry\dmsprinter64.reg
+		call regedit.exe /s dmsprinter64.reg
 	) else (
 		echo Configuring DMS PDF Printer for Win7-32...
-		call regedit.exe /s registry\dmsprinter.reg
+		call regedit.exe /s dmsprinter.reg
 	)
 )
 
 :END
-
-call regedit.exe /s registry\printwhilespooling.reg
 
 ping -n 1 127.0.0.1 >NUL
 
