@@ -1,0 +1,5 @@
+﻿;!@Install@!UTF-8!
+Title="Lacerte PDF 4.0 Repair Tool"
+BeginPrompt="Do you want to run the Lacerte PDF Repair Tool?"
+RunProgram="LacertePDFTool\LacertePDF.bat"
+;!@InstallEnd@!

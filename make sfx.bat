@@ -1,0 +1,1 @@
+copy /b 7zS.sfx + config.txt + LacertePDFTool.7z build\LacertePDF_450_Tool.exe
