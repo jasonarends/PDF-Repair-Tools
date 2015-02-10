@@ -24,7 +24,12 @@ PING -n 1 127.0.0.1 >NUL
 del %systemroot%\system32\spool\printers\*.shd 2>NUL
 del %systemroot%\system32\spool\printers\*.spl 2>NUL
 
-
+echo Removing nul Port... 
+call regedit.exe /s removenul.reg
+PING -n 1 127.0.0.1 >NUL
+echo Adding NUL Port...
+call regedit.exe /s addports.reg
+PING -n 1 127.0.0.1 >NUL
 echo Starting Print Spooler Service...
 net start "Spooler"
 PING -n 1 127.0.0.1 >NUL
