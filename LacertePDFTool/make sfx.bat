@@ -1,0 +1,1 @@
+copy /b 7zS.sfx + config.txt + lacertepdfwin10.7z build\Lacerte_PDF_Tool_Win10.exe

@@ -1,6 +1,6 @@
 @ECHO OFF
 setlocal EnableDelayedExpansion
-
+%~d0
 cd %~p0
 
 color 0f
@@ -37,11 +37,11 @@ echo Starting Print Spooler Service...
 net start "Spooler"
 PING -n 1 127.0.0.1 >NUL
 echo Installing Lacerte PDF Printer...
-call .\amyuni400\install.exe -s "Lacerte PDF" -n "Intuit Inc." -O "lsc" -c "07EFCDAB01000100CC84AC581282824C32A0944C3CE5CACA1509E3EDB3B8A8B75CE7ED37B486C9906518B76D6267D666CB1CA1196FBFF0A5D5511E001E4D"
+call .\amyuni450\install.exe -s "Lacerte PDF" -n "Intuit Inc." -O "NUL:" -c "07EFCDAB01000100CC84AC581282824C32A0944C3CE5CACA1509E3EDB3B8A8B75CE7ED37B486C9906518B76D6267D666CB1CA1196FBFF0A5D5511E001E4D"
 PING -n 1 127.0.0.1 >NUL
 
 echo Installing Lacerte Tax PDF 4.0 Printer
-call .\amyuni400\install.exe -s "Lacerte Tax PDF 4.0" -n "Intuit Inc." -O "lsc" -c "07EFCDAB01000100CC84AC581282824C32A0944C3CE5CACA1509E3EDB3B8A8B75CE7ED37B486C9906518B76D6267D666CB1CA1196FBFF0A5D5511E001E4D"
+call .\amyuni450\install.exe -s "Lacerte Tax PDF 4.0" -n "Intuit Inc." -O "NUL:" -c "07EFCDAB01000100CC84AC581282824C32A0944C3CE5CACA1509E3EDB3B8A8B75CE7ED37B486C9906518B76D6267D666CB1CA1196FBFF0A5D5511E001E4D"
 PING -n 1 127.0.0.1 >NUL
 
 if exist "c:\program files\intuit\dms\dms.exe" (
@@ -67,10 +67,10 @@ if not exist "c:\users" (
 	call regedit.exe /s dmsprinterxp.reg
 ) else (
 	if exist "c:\program files (x86)" (
-		echo Configuring DMS PDF Printer for Win7-64...
+		echo Configuring DMS PDF Printer for Win-64...
 		call regedit.exe /s dmsprinter64.reg
 	) else (
-		echo Configuring DMS PDF Printer for Win7-32...
+		echo Configuring DMS PDF Printer for Win-32...
 		call regedit.exe /s dmsprinter.reg
 	)
 )
