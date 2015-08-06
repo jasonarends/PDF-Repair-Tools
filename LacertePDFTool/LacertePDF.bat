@@ -1,5 +1,5 @@
 @ECHO OFF
-setlocal EnableDelayedExpansion
+setlocal EnableDelayedExpansion EnableExtensions
 %~d0
 cd %~p0
 
@@ -62,17 +62,12 @@ echo DMS Detected... Installing DMS PDF Printer...
 call .\amyuni450\install.exe -s "DMS PDF Printer" -n "Intuit Inc." -O "dms" -c "07EFCDAB01000100CC84AC581282824C32A0944C3CE5CACA1509E3EDB3B8A8B75CE7ED37B486C9906518B76D6267D666CB1CA1196FBFF0A5D5511E001E4D"
 PING -n 1 127.0.0.1 >NUL
 
-if not exist "c:\users" (
-	echo Configuring DMS PDF Printer for XP...
-	call regedit.exe /s dmsprinterxp.reg
+if exist "c:\program files (x86)" (
+	echo Configuring DMS PDF Printer for Win-64...
+	call regedit.exe /s dmsprinter64.reg
 ) else (
-	if exist "c:\program files (x86)" (
-		echo Configuring DMS PDF Printer for Win-64...
-		call regedit.exe /s dmsprinter64.reg
-	) else (
-		echo Configuring DMS PDF Printer for Win-32...
-		call regedit.exe /s dmsprinter.reg
-	)
+	echo Configuring DMS PDF Printer for Win-32...
+	call regedit.exe /s dmsprinter.reg
 )
 
 :END
@@ -84,6 +79,16 @@ echo Restarting Print Spooler Service...
 NET STOP "Spooler"
 PING -n 3 127.0.0.1 >NUL
 NET START "Spooler"
+
+echo Copying pdf install files...
+
+if exist "c:\program files (x86)\common files" (
+	if not exist "c:\program files (x86)\common files\lacerte shared\PDF 4.0" mkdir "c:\program files (x86)\common files\lacerte shared\PDF 4.0"
+	Copy .\amyuni450\*.* /Y "c:\program files (x86)\common files\lacerte shared\PDF 4.0"
+) else (
+	if not exist "c:\program files\common files\lacerte shared\PDF 4.0" mkdir "c:\program files\common files\lacerte shared\PDF 4.0"
+	Copy .\amyuni450\*.* /Y "c:\program files\common files\lacerte shared\PDF 4.0"
+)
 
 echo Lacerte PDF Printer Repair Tool finished...
 
